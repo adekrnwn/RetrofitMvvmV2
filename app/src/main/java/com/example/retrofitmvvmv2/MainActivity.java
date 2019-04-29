@@ -27,19 +27,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         HeroesViewModel heroesViewModel = ViewModelProviders.of(this).get(HeroesViewModel.class);
-        heroesViewModel.getHeroesList().observe(this, new Observer<List<Hero>>() {
-            @Override
-            public void onChanged(List<Hero> heroes) {
-                heroesAdapter = new HeroesAdapter(MainActivity.this, heroes);
-                recyclerView.setAdapter(heroesAdapter);
-            }
+        heroesViewModel.getHeroesList().observe(this, heroes -> {
+            heroesAdapter = new HeroesAdapter(MainActivity.this, heroes);
+            recyclerView.setAdapter(heroesAdapter);
         });
     }
 
-
-    @Override
-    public void onBackPressed() {
-
-
-    }
 }

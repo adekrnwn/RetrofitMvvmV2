@@ -17,8 +17,8 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HeroesAdapter extends RecyclerView.Adapter<HeroesAdapter.HeroViewHolder> {
-    Context mCtx;
-    List<Hero> heroesList;
+    private Context mCtx;
+    private List<Hero> heroesList;
 
     public HeroesAdapter(Context mCtx, List<Hero> heroList) {
         this.mCtx = mCtx;
