@@ -13,19 +13,21 @@ import java.util.List;
 import javax.inject.Inject;
 
 class HeroesViewModel extends AndroidViewModel {
-    //this is the data that we will fetch asynchronously
-    private MutableLiveData<List<Hero>> heroesList;
+
     private HeroesRepository heroesRepository;
 
-    @Inject
-    public HeroesViewModel(@NonNull Application application){
+    public HeroesViewModel(Application application){
         super(application);
         heroesRepository = new HeroesRepository(application);
-        heroesList = heroesRepository.getHeroesList();
+
     }
 
     LiveData<List<Hero>> getHeroesList() {
-        return this.heroesList;
+        return heroesRepository.getHeroesList();
+    }
+
+    LiveData<Boolean>getIsUpdating(){
+        return heroesRepository.getIsUpdating();
     }
 
 }
