@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProgressBar  progressBar;
     private HeroesViewModel heroesViewModel;
+    public static String  TOAST_MESSAGE = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             if (aBoolean){
                 progressBar.setVisibility(View.VISIBLE);
             }else {
+                Toast.makeText(this, TOAST_MESSAGE, Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.INVISIBLE);
             }
         });
@@ -59,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void startObserve() {
         heroesViewModel.refreshHeroesList();
-        Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show();
     }
 
 

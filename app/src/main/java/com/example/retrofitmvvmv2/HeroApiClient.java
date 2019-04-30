@@ -9,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@Singleton
 class HeroApiClient {
 
     private static final String BASE_URL = "https://simplifiedcoding.net/demos/";
