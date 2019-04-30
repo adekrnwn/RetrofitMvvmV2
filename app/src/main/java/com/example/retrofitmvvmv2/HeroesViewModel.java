@@ -15,19 +15,28 @@ import javax.inject.Inject;
 class HeroesViewModel extends AndroidViewModel {
 
     private HeroesRepository heroesRepository;
+    private MutableLiveData<List<Hero>> heroesList;
 
     public HeroesViewModel(Application application){
         super(application);
         heroesRepository = new HeroesRepository(application);
-
+        if (heroesList != null){
+            return;
+        }
+        heroesList = heroesRepository.getHeroesList();
     }
 
     LiveData<List<Hero>> getHeroesList() {
-        return heroesRepository.getHeroesList();
+        return heroesList;
     }
 
     LiveData<Boolean>getIsUpdating(){
         return heroesRepository.getIsUpdating();
+    }
+
+    LiveData<List<Hero>>refreshHeroesList(){
+        heroesList = heroesRepository.refreshHeroesList();
+        return heroesList;
     }
 
 }

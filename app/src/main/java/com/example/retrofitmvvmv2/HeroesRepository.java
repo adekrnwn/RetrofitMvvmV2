@@ -22,7 +22,7 @@ class HeroesRepository {
      private MutableLiveData<Boolean> isUpdating = new MutableLiveData<>();
      private HeroApiInterface api;
      private Application application;
-     private static HeroesRepository instance;
+     private MutableLiveData<List<Hero>> heroesList = new MutableLiveData<>();
 
     public HeroesRepository(Application application){
         this.application = application;
@@ -30,9 +30,8 @@ class HeroesRepository {
     }
 
     //This method is using Retrofit to get the JSON data from URL
-     LiveData<List<Hero>> getHeroesList() {
+     MutableLiveData<List<Hero>> getHeroesList() {
 
-        final MutableLiveData<List<Hero>> heroesList = new MutableLiveData<>();
 
         Call<List<Hero>> call = api.getHeroes();
 
@@ -57,5 +56,28 @@ class HeroesRepository {
 
     LiveData<Boolean>getIsUpdating(){
          return isUpdating;
+    }
+
+    MutableLiveData<List<Hero>>refreshHeroesList(){
+
+        Call<List<Hero>> call = api.getHeroes();
+
+        isUpdating.setValue(true);
+        call.enqueue(new Callback<List<Hero>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Hero>> call,@NonNull Response<List<Hero>> response) {
+
+                //setting the list to MutableLiveData
+                heroesList.setValue(response.body());
+                isUpdating.setValue(false);
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Hero>> call,@NonNull Throwable t) {
+                isUpdating.setValue(false);
+                Toast.makeText(application, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        return heroesList;
     }
 }

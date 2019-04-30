@@ -42,13 +42,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         heroesViewModel = ViewModelProviders.of(this).get(HeroesViewModel.class);
-
-        startObserve();
-    }
-
-    private void startObserve() {
         heroesViewModel.getHeroesList().observe(this, heroes -> {
-            Toast.makeText(this, "Loaded", Toast.LENGTH_SHORT).show();
             heroesAdapter = new HeroesAdapter(MainActivity.this, heroes);
             recyclerView.setAdapter(heroesAdapter);
         });
@@ -60,6 +54,12 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.INVISIBLE);
             }
         });
+
+    }
+
+    private void startObserve() {
+        heroesViewModel.refreshHeroesList();
+        Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show();
     }
 
 
