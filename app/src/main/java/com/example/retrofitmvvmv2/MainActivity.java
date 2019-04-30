@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
 
         FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
-        floatingActionButton.setOnClickListener(view -> startObserve());
+        floatingActionButton.setOnClickListener(view -> refreshHeroesList());
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void startObserve() {
+    private void refreshHeroesList() {
         heroesViewModel.refreshHeroesList();
     }
 
