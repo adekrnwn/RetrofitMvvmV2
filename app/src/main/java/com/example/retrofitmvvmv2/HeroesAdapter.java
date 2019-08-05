@@ -19,9 +19,13 @@ public class HeroesAdapter extends RecyclerView.Adapter<HeroesAdapter.HeroViewHo
     private Context mCtx;
     private List<Hero> heroesList;
 
-    public HeroesAdapter(Context mCtx, List<Hero> heroList) {
+    public HeroesAdapter(Context mCtx) {
         this.mCtx = mCtx;
-        this.heroesList = heroList;
+    }
+
+    public void setHeroesList(List<Hero> heroesList) {
+        this.heroesList = heroesList;
+        notifyDataSetChanged();
     }
 
     @NonNull

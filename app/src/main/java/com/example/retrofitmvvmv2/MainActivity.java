@@ -16,9 +16,9 @@ public class MainActivity extends AppCompatActivity {
 
     private HeroesAdapter heroesAdapter;
     private RecyclerView recyclerView;
-    private ProgressBar  progressBar;
+    private ProgressBar progressBar;
     private HeroesViewModel heroesViewModel;
-    public static String  TOAST_MESSAGE = null;
+    public static String TOAST_MESSAGE = null;
 
 
     @Override
@@ -34,17 +34,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        heroesAdapter = new HeroesAdapter(MainActivity.this);
+        recyclerView.setAdapter(heroesAdapter);
 
         heroesViewModel = ViewModelProviders.of(this).get(HeroesViewModel.class);
-        heroesViewModel.getHeroesList().observe(this, heroes -> {
-            heroesAdapter = new HeroesAdapter(MainActivity.this, heroes);
-            recyclerView.setAdapter(heroesAdapter);
-        });
+        heroesViewModel.getHeroesList().observe(this, heroes -> heroesAdapter.setHeroesList(heroes));
 
         heroesViewModel.getIsUpdating().observe(this, aBoolean -> {
-            if (aBoolean){
+            if (aBoolean) {
                 progressBar.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 Toast.makeText(this, TOAST_MESSAGE, Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.INVISIBLE);
             }
