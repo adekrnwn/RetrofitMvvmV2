@@ -9,4 +9,5 @@ public interface HeroApiInterface {
 
     @GET("marvel")
     Call<List<Hero>> getHeroes();
+
 }

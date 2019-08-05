@@ -18,10 +18,12 @@ class HeroesViewModel extends AndroidViewModel {
     public HeroesViewModel(Application application){
         super(application);
         heroesRepository = new HeroesRepository();
-        heroesList = heroesRepository.getHeroesList();
     }
 
     LiveData<List<Hero>> getHeroesList() {
+        if (heroesList==null){
+            heroesList = heroesRepository.getHeroesList();
+        }
         return heroesList;
     }
 
@@ -32,5 +34,4 @@ class HeroesViewModel extends AndroidViewModel {
     void refreshHeroesList(){
         heroesList = heroesRepository.getHeroesList();
     }
-
 }

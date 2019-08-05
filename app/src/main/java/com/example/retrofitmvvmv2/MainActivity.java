@@ -1,25 +1,16 @@
 package com.example.retrofitmvvmv2;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar  progressBar;
     private HeroesViewModel heroesViewModel;
     public static String  TOAST_MESSAGE = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +55,5 @@ public class MainActivity extends AppCompatActivity {
     private void refreshHeroesList() {
         heroesViewModel.refreshHeroesList();
     }
-
 
 }

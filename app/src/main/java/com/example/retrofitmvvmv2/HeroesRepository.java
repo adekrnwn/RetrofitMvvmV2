@@ -29,7 +29,6 @@ class HeroesRepository {
     //This method is using Retrofit to get the JSON data from URL
      LiveData<List<Hero>> getHeroesList() {
 
-
         Call<List<Hero>> call = api.getHeroes();
 
         isUpdating.setValue(true);
